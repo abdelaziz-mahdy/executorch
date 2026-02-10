@@ -88,6 +88,11 @@ class StagingBuffer final {
     for (size_t i = 0; i < numel; ++i) {
       dst[i] = static_cast<DST_T>(src[i]);
     }
+    vmaFlushAllocation(
+        vulkan_buffer_.vma_allocator(),
+        vulkan_buffer_.allocation(),
+        0u,
+        VK_WHOLE_SIZE);
   }
 
   inline void copy_to(void* dst, const size_t nbytes) {
@@ -111,6 +116,11 @@ class StagingBuffer final {
 
   inline void set_staging_zeros() {
     memset(data(), 0, nbytes());
+    vmaFlushAllocation(
+        vulkan_buffer_.vma_allocator(),
+        vulkan_buffer_.allocation(),
+        0u,
+        VK_WHOLE_SIZE);
   }
 
   template <typename T>
