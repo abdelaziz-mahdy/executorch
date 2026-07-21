@@ -41,6 +41,9 @@ endif()
 include(${EXECUTORCH_ROOT}/tools/cmake/Utils.cmake)
 
 function(gen_vulkan_shader_lib_cpp shaders_path)
+  # Expand shader glob pattern (CMake DEPENDS doesn't support wildcards)
+  # Patched by executorch_native build system
+  file(GLOB _ET_SHADER_GLOB_DEPS "${shaders_path}/*.glsl" "${shaders_path}/*.glslh")
   set(VULKAN_SHADERGEN_ENV "")
   set(VULKAN_SHADERGEN_OUT_PATH ${CMAKE_BINARY_DIR}/vulkan_compute_shaders)
 

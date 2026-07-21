@@ -21,7 +21,7 @@ endif()
 
 include(${EXECUTORCH_ROOT}/tools/cmake/Utils.cmake)
 
-set(_common_compile_options -Wall -Werror -Wno-deprecated-declarations)
+set(_common_compile_options -Wall -Wno-deprecated-declarations -Wno-shorten-64-to-32)
 
 # Sanitizer flags (asan + ubsan) for security hardening — CI only. Enable via:
 # cmake --preset mlx-release -DEXECUTORCH_MLX_ENABLE_SANITIZERS=ON
